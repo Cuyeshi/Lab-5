@@ -40,7 +40,7 @@ namespace ParsingTests
         }
         
         /// <summary>
-        /// 
+        /// Тест на проверку одного подходящего адреса класса А.
         /// </summary>
         [TestMethod]
         public void SingleClassAIP()
@@ -52,9 +52,9 @@ namespace ParsingTests
             Assert.IsTrue(result.ContainsKey("C"));
             CollectionAssert.AreEqual(new List<string> { "192.168.0.1" }, result["C"]);
         }
-        
+
         /// <summary>
-        /// 
+        /// Тест на проверку одного подходящего адреса класса E.
         /// </summary>
         [TestMethod]
         public void SingleClassEIP()
@@ -66,9 +66,9 @@ namespace ParsingTests
             Assert.IsTrue(result.ContainsKey("E"));
             CollectionAssert.AreEqual(new List<string> { "255.255.255.255" }, result["E"]);
         }
-        
+
         /// <summary>
-        /// 
+        /// Тест на проверку три подходящих адресов класса С.
         /// </summary>
         [TestMethod]
         public void MultipleIPInSingleClass()
@@ -80,9 +80,9 @@ namespace ParsingTests
             Assert.IsTrue(result.ContainsKey("C"));
             CollectionAssert.AreEqual(new List<string> { "192.168.0.1", "192.168.0.2", "192.168.0.3" }, result["C"]);
         }
-        
+
         /// <summary>
-        /// 
+        /// Тест на проверку 5 адресов на 5 классов.
         /// </summary>
         [TestMethod]
         public void IPsInAllClasses()
@@ -102,9 +102,9 @@ namespace ParsingTests
             CollectionAssert.AreEqual(new List<string> { "224.0.0.1" }, result["D"]);
             CollectionAssert.AreEqual(new List<string> { "255.255.255.255" }, result["E"]);
         }
-        
+
         /// <summary>
-        /// 
+        /// Тест на проверку исключительной ситуации, когда адрес не подходит под допустимый формат.
         /// </summary>
         [TestMethod]
         public void InvalidIPsInInput()
@@ -118,8 +118,6 @@ namespace ParsingTests
             CollectionAssert.AreEqual(new List<string> { "192.168.0.1" }, result["C"]);
             CollectionAssert.AreEqual(new List<string> { "255.255.255.255" }, result["E"]);
         }
-
-
 
     }
 }

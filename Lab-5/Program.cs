@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using IPAddressSorterLibrary;
 
 class Program
@@ -24,7 +25,8 @@ class Program
             Console.WriteLine();
         }
 
-        Console.WriteLine("\nЗавершение программы...");
         Console.ReadKey();
+        Console.WriteLine("\nЗавершение программы...");
+        Thread.Sleep(2000);
     }
 }
