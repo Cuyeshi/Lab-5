@@ -6,6 +6,7 @@ class Program
 {
     static void Main()
     {
+        Console.WriteLine("Введите текст: ");
         // Пример строки с IP-адресами
         string inputText = Console.ReadLine(); // "Текст с IP-адресами 192.168.0.1, 10.0.0.1, 172.16.0.1, 8.8.8.8, 192.168.1.1";
 
@@ -15,7 +16,7 @@ class Program
         // Вывод IP-адресов по классам
         foreach (var zxc in ipAddressesByClass)
         {
-            Console.WriteLine($"IP-адреса класса {zxc.Key}:");
+            Console.WriteLine($"\nIP-адреса класса {zxc.Key}:");
             foreach (var ipAddress in zxc.Value)
             {
                 Console.WriteLine(ipAddress);
@@ -23,6 +24,7 @@ class Program
             Console.WriteLine();
         }
 
+        Console.WriteLine("\nЗавершение программы...");
         Console.ReadKey();
     }
 }

@@ -16,7 +16,8 @@ namespace IPAddressSorterLibrary
         public static Dictionary<string, List<string>> SortIPAddressesByClass(string inputText)
         {
             // Паттерн для поиска IP-адресов
-            string pattern = @"\b(?:\d{1,3}\.){3}\d{1,3}\b";
+            // "\b(?:\d{1,3}\.){3}\d{1,3}\b"
+            string pattern = @"\b(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b";
 
             // Создание регулярного выражения
             Regex regex = new Regex(pattern);
