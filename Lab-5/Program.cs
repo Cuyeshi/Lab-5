@@ -12,10 +12,8 @@ namespace Lab_5
         static void Main(string[] args)
         {
 
-            Console.WriteLine("Введите текст: ");
             // Пример строки с IP-адресами
-            StringBuilder inputText = new StringBuilder(); // Тестовый текст с IP-адресами 192.168.0.1, 10.0.0.1, 172.16.0.1, 8.8.8.8, 192.168.1.1
-            inputText = Console.ReadLine();
+            StringBuilder inputText = new StringBuilder("Тестовый текст с IP-адресами 192.168.0.1, 10.0.0.1, 172.16.0.1, 8.8.8.8, 192.168.1.1");
 
             // Паттерн для поиска IP-адресов
             string pattern = @"\b(?:\d{1,3}\.){3}\d{1,3}\b";
@@ -26,8 +24,12 @@ namespace Lab_5
             // Поиск всех совпадений в строке
             MatchCollection matches = regex.Matches(inputText.ToString());
 
-            // Словарь для хранения IP-адресов по классам
-            Dictionary<string, List<string>> ipAddressesByClass = new Dictionary<string, List<string>>();
+            // Создание массивов для классов IP-адресов
+            List<string>[] ipAddressArrays = new List<string>[5];
+            for (int i = 0; i < 5; i++)
+            {
+                ipAddressArrays[i] = new List<string>();
+            }
 
             foreach (Match match in matches)
             {
@@ -37,46 +39,68 @@ namespace Lab_5
                 string[] octets = ipAddress.Split('.');
                 int firstOctet = int.Parse(octets[0]);
 
-                string ipClass = "";
+                int ipClass = -1;
                 if (firstOctet >= 1 && firstOctet <= 126)
                 {
-                    ipClass = "A";
+                    ipClass = 0; // Класс A
                 }
                 else if (firstOctet >= 128 && firstOctet <= 191)
                 {
-                    ipClass = "B";
+                    ipClass = 1; // Класс B
                 }
                 else if (firstOctet >= 192 && firstOctet <= 223)
                 {
-                    ipClass = "C";
+                    ipClass = 2; // Класс C
                 }
                 else if (firstOctet >= 224 && firstOctet <= 239)
                 {
-                    ipClass = "D";
+                    ipClass = 3; // Класс D
                 }
                 else if (firstOctet >= 240 && firstOctet <= 255)
                 {
-                    ipClass = "E";
+                    ipClass = 4; // Класс E
                 }
 
-                // Добавление IP-адреса в соответствующий класс
-                if (!ipAddressesByClass.ContainsKey(ipClass))
+                // Добавление IP-адреса в соответствующий массив класса
+                if (ipClass != -1)
                 {
-                    ipAddressesByClass[ipClass] = new List<string>();
+                    ipAddressArrays[ipClass].Add(ipAddress);
                 }
-                ipAddressesByClass[ipClass].Add(ipAddress);
             }
 
             // Вывод IP-адресов по классам
-            foreach (var kvp in ipAddressesByClass)
+            for (int i = 0; i < 5; i++)
             {
-                Console.WriteLine($"IP-адреса класса {kvp.Key}:");
-                foreach (var ipAddress in kvp.Value)
+                string ipClass = "";
+                switch (i)
+                {
+                    case 0:
+                        ipClass = "A";
+                        break;
+                    case 1:
+                        ipClass = "B";
+                        break;
+                    case 2:
+                        ipClass = "C";
+                        break;
+                    case 3:
+                        ipClass = "D";
+                        break;
+                    case 4:
+                        ipClass = "E";
+                        break;
+                }
+
+                Console.WriteLine($"IP-адреса класса {ipClass}:");
+                foreach (var ipAddress in ipAddressArrays[i])
                 {
                     Console.WriteLine(ipAddress);
                 }
                 Console.WriteLine();
+
+
             }
+        Console.ReadKey();
         }
     }
 }
